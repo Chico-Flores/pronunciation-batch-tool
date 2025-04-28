@@ -1,11 +1,11 @@
 // server.js
 
-const express = require('express');
-const multer = require('multer');
-const csv = require('fast-csv');
-const fs = require('fs');
+import express from 'express';
+import multer from 'multer';
+import csv from 'fast-csv';
+import fs from 'fs';
 import fetch from 'node-fetch';
-const { OpenAI } = require('openai');
+import { OpenAI } from 'openai';
 
 const SUPABASE_URL = 'https://cetmvcykfytixlxcxupa.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNldG12Y3lrZnl0aXhseGN4dXBhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU3Njk2MDQsImV4cCI6MjA2MTM0NTYwNH0.OX8Qf9uOwaPWSvg9DUDfUvKVGG1BMxPXAdgp3pthX-k';
