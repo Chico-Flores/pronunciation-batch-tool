@@ -1,3 +1,5 @@
+// server.js
+
 const express = require('express');
 const multer = require('multer');
 const csv = require('fast-csv');
@@ -6,8 +8,8 @@ const fetch = require('node-fetch');
 const { OpenAI } = require('openai');
 
 const SUPABASE_URL = 'https://cetmvcykfytixlxcxupa.supabase.co';
-const SUPABASE_ANON_KEY = 'YOUR-SUPABASE-ANON-KEY';
-const OPENAI_API_KEY = 'YOUR-OPENAI-API-KEY';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNldG12Y3lrZnl0aXhseGN4dXBhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU3Njk2MDQsImV4cCI6MjA2MTM0NTYwNH0.OX8Qf9uOwaPWSvg9DUDfUvKVGG1BMxPXAdgp3pthX-k';
+const OPENAI_API_KEY = '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';
 
 const app = express();
 const upload = multer({ dest: 'uploads/' });
@@ -16,6 +18,11 @@ const PORT = process.env.PORT || 3000;
 const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
 
 app.use(express.static('public'));
+
+// NEW FIX: Serve index.html at root
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/public/index.html');
+});
 
 async function checkSupabase(name) {
   const response = await fetch(`${SUPABASE_URL}/rest/v1/pronunciations?name=eq.${encodeURIComponent(name)}`, {
