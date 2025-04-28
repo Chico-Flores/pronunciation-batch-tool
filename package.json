@@ -2,6 +2,7 @@
   "name": "pronunciation-batch-tool",
   "version": "1.0.0",
   "description": "Batch tool for processing name pronunciations",
+  "type": "module",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
