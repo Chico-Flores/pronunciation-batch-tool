@@ -12,6 +12,18 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const OPENAI_API_KEY = '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';
 
 const app = express();
+// Ensure uploads/ and processed/ directories exist
+const uploadDir = './uploads';
+const processedDir = './processed';
+
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir);
+}
+
+if (!fs.existsSync(processedDir)) {
+  fs.mkdirSync(processedDir);
+}
+
 const upload = multer({ dest: 'uploads/' });
 const PORT = process.env.PORT || 3000;
 
