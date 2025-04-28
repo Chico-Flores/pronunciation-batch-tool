@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pronunciation Batch Tool</title>
+</head>
+<body style="font-family: Arial, sans-serif; padding: 20px;">
+  <h2>Pronunciation Batch Tool</h2>
+  
+  <form id="uploadForm" enctype="multipart/form-data">
+    <input type="file" name="file" id="fileInput" accept=".csv" required />
+    <br><br>
+    <button type="submit">Upload & Process CSV</button>
+  </form>
+
+  <div id="status" style="margin-top: 20px;"></div>
+
+  <script>
+    const form = document.getElementById('uploadForm');
+    const statusDiv = document.getElementById('status');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fileInput = document.getElementById('fileInput');
+      const file = fileInput.files[0];
+      if (!file) {
+        statusDiv.innerText = "Please select a file.";
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('file', file);
+
+      statusDiv.innerText = "Processing... please wait! 🔄";
+
+      try {
+        const response = await fetch('/upload', {
+          method: 'POST',
+          body: formData
+        });
+
+        if (!response.ok) {
+          throw new Error('Upload failed.');
+        }
+
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'pronounced_debtors.csv';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+
+        statusDiv.innerText = "✅ Complete! File downloaded.";
+      } catch (error) {
+        console.error(error);
+        statusDiv.innerText = "❌ Error occurred during processing.";
+      }
+    });
+  </script>
+</body>
+</html>
