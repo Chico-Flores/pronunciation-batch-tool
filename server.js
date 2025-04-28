@@ -9,7 +9,7 @@ import { OpenAI } from 'openai';
 
 const SUPABASE_URL = 'https://cetmvcykfytixlxcxupa.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNldG12Y3lrZnl0aXhseGN4dXBhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU3Njk2MDQsImV4cCI6MjA2MTM0NTYwNH0.OX8Qf9uOwaPWSvg9DUDfUvKVGG1BMxPXAdgp3pthX-k';
-const OPENAI_API_KEY = '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';
+const OPENAI_API_KEY = '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';
 
 const app = express();
 // Ensure uploads/ and processed/ directories exist
