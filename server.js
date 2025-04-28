@@ -77,6 +77,8 @@ async function getPronunciationFromGPT(name) {
 }
 
 app.post('/upload', upload.single('file'), async (req, res) => {
+  console.log("File uploaded:", req.file); // ADD THIS LINE
+  
   const results = [];
   const pronouncedResults = [];
 
@@ -84,6 +86,8 @@ app.post('/upload', upload.single('file'), async (req, res) => {
     .pipe(csv.parse({ headers: true }))
     .on('data', (data) => results.push(data))
     .on('end', async () => {
+      console.log("Starting CSV parsing..."); // ADD THIS LINE
+
       for (const row of results) {
         const firstName = row['First Name']?.trim() || '';
         const lastName = row['Last Name']?.trim() || '';
@@ -105,11 +109,14 @@ app.post('/upload', upload.single('file'), async (req, res) => {
         pronouncedResults.push(row);
       }
 
+      console.log("Finished reading CSV..."); // ADD THIS LINE
+
       const outputPath = `processed/${Date.now()}_pronounced.csv`;
       const ws = fs.createWriteStream(outputPath);
       csv.write(pronouncedResults, { headers: true }).pipe(ws);
 
       ws.on('finish', () => {
+        console.log("Sending final CSV file...");
         res.download(outputPath, 'pronounced_debtors.csv');
       });
     });
