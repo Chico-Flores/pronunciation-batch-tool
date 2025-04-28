@@ -11,8 +11,8 @@ const app = express();
 const upload = multer({ dest: 'uploads/' });
 const PORT = process.env.PORT || 10000;
 
-const SUPABASE_URL = 'https://cetmvcykfytixlxcxupa.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNldG12Y3lrZnl0aXhseGN4dXBhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU3Njk2MDQsImV4cCI6MjA2MTM0NTYwNH0.OX8Qf9uOwaPWSvg9DUDfUvKVGG1BMxPXAdgp3pthX-k';
+const SUPABASE_URL = process.env.SUPABASE_URL;
+const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 
 const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
