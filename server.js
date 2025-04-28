@@ -4,7 +4,7 @@ const express = require('express');
 const multer = require('multer');
 const csv = require('fast-csv');
 const fs = require('fs');
-const fetch = require('node-fetch');
+import fetch from 'node-fetch';
 const { OpenAI } = require('openai');
 
 const SUPABASE_URL = 'https://cetmvcykfytixlxcxupa.supabase.co';
